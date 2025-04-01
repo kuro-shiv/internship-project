@@ -2,7 +2,7 @@
 
  testing sites : 
 1. https://the-internet.herokuapp.com/
-1.https://cosmocode.io/
+1. https://cosmocode.io/
 1. https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
 1. https://fs2.formsite.com/meherpavan/form2/index.html?1537702596407
 1. https://www.saucedemo.com/
