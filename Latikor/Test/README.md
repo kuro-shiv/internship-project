@@ -9,3 +9,4 @@
 1. https://www.selenium.dev/
 1. https://jqueryui.com/
 1. https://www.google.co.in/
+1. https://playwright.dev/
