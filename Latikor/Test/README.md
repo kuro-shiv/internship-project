@@ -1,11 +1,11 @@
 # Main_test_case
 
-@ testing sites : 
-https://the-internet.herokuapp.com/ 
-https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-https://fs2.formsite.com/meherpavan/form2/index.html?1537702596407
-https://www.saucedemo.com/
-https://aigen023.blogspot.com//
-https://www.selenium.dev/
-https://jqueryui.com/
-https://www.google.co.in/
+ testing sites : 
+1. https://the-internet.herokuapp.com/ 
+1. https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+1. https://fs2.formsite.com/meherpavan/form2/index.html?1537702596407
+1. https://www.saucedemo.com/
+1. https://aigen023.blogspot.com//
+1. https://www.selenium.dev/
+1. https://jqueryui.com/
+1. https://www.google.co.in/
