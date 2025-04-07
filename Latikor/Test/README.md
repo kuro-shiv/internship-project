@@ -1,6 +1,7 @@
 # Main_test_case
 
- testing sites : 
+testing sites : 
+ 
 1. https://the-internet.herokuapp.com/
 1. https://cosmocode.io/
 1. https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
@@ -11,4 +12,3 @@
 1. https://jqueryui.com/
 1. https://www.google.co.in/
 1. https://playwright.dev/
-1. https://cosmocode.io/automation-practice-webtable/
