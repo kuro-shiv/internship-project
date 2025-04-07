@@ -1,6 +1,6 @@
 # Main_test_case
 
-testing sites : 
+Testing Sites : 
  
 1. https://the-internet.herokuapp.com/
 1. https://cosmocode.io/
