@@ -23,10 +23,9 @@ Each folder represents a unique organization and its respective challenge or pro
 
 Depending on the project:
 - HTML, CSS, JavaScript
-- Python, Flask
-- APIs & Web Scraping
+- Python
+- Automation using Selenium
 - UI/UX Design
-- Version Control with Git/GitHub
 
 ---
 
