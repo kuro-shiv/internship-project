@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details | AMRR TechSols</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Additional styles specific to this page */
+        .item-details-container {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 1.5rem;
+        }
+        
+        .back-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .back-button:hover {
+            background: #34495e;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            min-width: 150px;
+            color: #2c3e50;
+        }
+        
+        .detail-value {
+            flex: 1;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .action-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .edit-btn {
+            background: #3498db;
+            color: white;
+        }
+        
+        .edit-btn:hover {
+            background: #2980b9;
+        }
+        
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AMRR TechSols - Item Management</h1>
+        <nav>
+            <a href="index.html">View Items</a>
+            <a href="add-item.html">Add Items</a>
+        </nav>
+    </header>
+
+    <main class="item-details">
+        <a href="index.html" class="back-button">← Back to Items</a>
+        
+        <div class="item-details-container" id="itemDetailsContent">
+            <!-- Content will be loaded dynamically by JavaScript -->
+            <div class="loading-message">Loading item details...</div>
+        </div>
+    </main>
+
+    <!-- JavaScript files -->
+    <script>
+        // Get item ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemId = urlParams.get('id');
+        
+        // Load item details when page loads
+        document.addEventListener('DOMContentLoaded', async function() {
+            if (!itemId) {
+                document.getElementById('itemDetailsContent').innerHTML = `
+                    <div class="error-message">
+                        <p>No item ID specified. Please go back to the items list.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/items/${itemId}`);
+                if (!response.ok) {
+                    throw new Error('Item not found');
+                }
+                
+                const item = await response.json();
+                renderItemDetails(item);
+            } catch (error) {
+                document.getElementById('itemDetailsContent').innerHTML = `
+                    <div class="error-message">
+                        <p>Error loading item: ${error.message}</p>
+                    </div>
+                `;
+            }
+        });
+        
+        function renderItemDetails(item) {
+            const detailsContainer = document.getElementById('itemDetailsContent');
+            
+            // Format date
+            const formattedDate = new Date(item.updatedAt || item.createdAt).toLocaleString();
+            
+            // Create gallery HTML if there are additional images
+            let galleryHTML = '';
+            if (item.additionalImages && item.additionalImages.length > 0) {
+                galleryHTML = `
+                    <div class="image-gallery">
+                        ${item.additionalImages.map(img => `
+                            <img src="${img}" alt="Additional image" class="gallery-image" 
+                                 onerror="this.src='/img/placeholder.jpg'">
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            detailsContainer.innerHTML = `
+                <h2>${item.name}</h2>
+                <div class="detail-row">
+                    <div class="detail-label">Type:</div>
+                    <div class="detail-value">${item.type}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Description:</div>
+                    <div class="detail-value">${item.description || 'No description available'}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Last Updated:</div>
+                    <div class="detail-value">${formattedDate}</div>
+                </div>
+                
+                ${item.coverImage ? `
+                <div class="detail-row">
+                    <div class="detail-label">Main Image:</div>
+                    <div class="detail-value">
+                        <img src="${item.coverImage}" alt="${item.name}" style="max-width: 100%; max-height: 300px;"
+                             onerror="this.src='/img/placeholder.jpg'">
+                    </div>
+                </div>
+                ` : ''}
+                
+                ${galleryHTML}
+                
+                <div class="actions">
+                    <button class="action-btn edit-btn" onclick="location.href='add-item.html?edit=${item.id}'">Edit Item</button>
+                    <button class="action-btn delete-btn" onclick="deleteItem(${item.id})">Delete Item</button>
+                </div>
+            `;
+        }
+        
+        async function deleteItem(id) {
+            if (!confirm('Are you sure you want to delete this item? This action cannot be undone.')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/items/${id}`, {
+                    method: 'DELETE'
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to delete item');
+                }
+                
+                alert('Item deleted successfully!');
+                window.location.href = 'index.html';
+            } catch (error) {
+                alert(`Error deleting item: ${error.message}`);
+            }
+        }
+    </script>
+</body>
+</html>
