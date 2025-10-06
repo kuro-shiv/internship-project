@@ -11,7 +11,7 @@ Each folder represents a unique organization and its respective challenge or pro
 | Internship/Organization | Folder Name     | Description |
 |-------------------------|-----------------|-------------|
 | **Idea Labs**           | `Idea Labs/`     | Task-based submission created 4 months ago. |
-| **Latikor**             | `Latikor/`       | Recently updated project directory (last week). |
+| **Laitkor**             | `Latikor/`       | Recently updated project directory (last week). |
 | **Revoltronx**          | `Revoltronx/`    | Project files related to a search system or automation task. |
 | **VaultofCodes**        | `VaultofCodes/`  | Likely a project for a challenge or internship from Vault of Codes. |
 | **AMRR**        | `AMRR-TechSols/`  | Likely a project for a challenge or internship from AMRR. |
