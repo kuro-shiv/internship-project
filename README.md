@@ -15,6 +15,7 @@ Each folder represents a unique organization and its respective challenge or pro
 | **Revoltronx**          | `Revoltronx/`    | Project files related to a search system or automation task. |
 | **VaultofCodes**        | `VaultofCodes/`  | Likely a project for a challenge or internship from Vault of Codes. |
 | **AMRR**        | `AMRR-TechSols/`  | Likely a project for a challenge or internship from AMRR. |
+| **Robokwik**        | `EISystem/`  | A internship file done. A course clear my doubts |
 
 
 > 🔍 Each folder may contain documentation, code files, or other assets relevant to the internship/company listed.
